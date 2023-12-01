@@ -3,6 +3,7 @@ import matrix.compresor.CompressedColumnStorage;
 import matrix.compresor.CompressedRowStorage;
 import matrix.matrices.DoubleMatrix;
 import matrix.matrices.Matrix;
+import matrix.operations.sequential.CompressedMultiplication;
 import org.openjdk.jmh.annotations.*;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -47,7 +48,7 @@ public class CompressedMultiplicationBenchmarking {
     @Measurement(iterations = 1)
     @Warmup(iterations = 1)
     public void compressedMultiplication(Operands operands){
-        new Multiplication().compressedMultiplication(operands.a2, operands.b2);
+        CompressedMultiplication.execute(operands.a2, operands.b2);
     }
 }
 

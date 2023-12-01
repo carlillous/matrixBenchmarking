@@ -3,7 +3,8 @@ package matrix.operations;
 import matrix.compresor.CompressedColumnStorage;
 import matrix.compresor.CompressedRowStorage;
 import matrix.compresor.Coordinate;
-import matrix.matrices.Matrix;
+import matrix.matrices.*;
+import matrix.operations.sequential.CompressedMultiplication;
 import matrix.reader.MatrixReader;
 
 public class ReadMatrixMultiplication {
@@ -18,7 +19,7 @@ public class ReadMatrixMultiplication {
         CompressedColumnStorage b = new CompressedColumnStorage(coords.coordsToMatrix());
 
         long start = System.currentTimeMillis();
-        new Multiplication().compressedMultiplication(a,b);
+        Matrix c = CompressedMultiplication.execute(a,b);
         long stop = System.currentTimeMillis();
         System.out.println("Tiempo = "+(stop-start) * 1e-3);
 
