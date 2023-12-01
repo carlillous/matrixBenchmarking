@@ -6,6 +6,7 @@ import matrix.matrices.DoubleMatrix;
 import matrix.matrices.Matrix;
 import matrix.operations.parallel.ParallelStreamsMultiplication;
 import matrix.operations.parallel.ParallelThreadsMultiplication;
+import matrix.operations.parallel.ParalllelExecutorsMultiplication;
 import matrix.operations.sequential.ConventionalMultiplication;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -34,10 +35,12 @@ public class Testing {
 
         Matrix c1 = ConventionalMultiplication.execute(a,b);
         //Matrix c2 = ParallelStreamsMultiplication.execute(a,b);
-        Matrix c3 = ParallelThreadsMultiplication.execute(a,b);
+        //Matrix c3 = ParallelThreadsMultiplication.execute(a,b);
+        Matrix c4 = ParalllelExecutorsMultiplication.execute(a,b);
         c1.printMatrix();
         //c2.printMatrix();
-        c3.printMatrix();
+        //c3.printMatrix();
+        c4.printMatrix();
 
 
     }
