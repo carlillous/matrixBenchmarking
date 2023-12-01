@@ -5,6 +5,7 @@ import matrix.compresor.CompressedRowStorage;
 import matrix.matrices.DoubleMatrix;
 import matrix.matrices.Matrix;
 import matrix.operations.parallel.ParallelStreamsMultiplication;
+import matrix.operations.parallel.ParallelThreadsMultiplication;
 import matrix.operations.sequential.ConventionalMultiplication;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
@@ -32,10 +33,11 @@ public class Testing {
         }
 
         Matrix c1 = ConventionalMultiplication.execute(a,b);
-        Matrix c2 = ParallelStreamsMultiplication.execute(a,b);
-        System.out.println(c1 == c2);
+        //Matrix c2 = ParallelStreamsMultiplication.execute(a,b);
+        Matrix c3 = ParallelThreadsMultiplication.execute(a,b);
         c1.printMatrix();
-        c2.printMatrix();
+        //c2.printMatrix();
+        c3.printMatrix();
 
 
     }
