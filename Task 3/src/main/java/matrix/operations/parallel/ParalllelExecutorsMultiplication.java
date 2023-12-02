@@ -20,7 +20,7 @@ public class ParalllelExecutorsMultiplication {
 
         try {
             executorService.shutdown();
-            executorService.awaitTermination(1000, TimeUnit.SECONDS);
+            executorService.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
         }catch(InterruptedException e){
             throw new RuntimeException(e);
         }

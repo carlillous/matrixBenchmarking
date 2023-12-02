@@ -1,22 +1,16 @@
 package matrix.operations;
 
-import matrix.compresor.CompressedColumnStorage;
-import matrix.compresor.CompressedRowStorage;
 import matrix.matrices.DoubleMatrix;
 import matrix.matrices.Matrix;
-import matrix.operations.parallel.ParallelStreamsMultiplication;
-import matrix.operations.parallel.ParallelThreadsMultiplication;
-import matrix.operations.parallel.ParalllelExecutorsMultiplication;
+import matrix.operations.parallel.StreamsMultiplication;
 import matrix.operations.sequential.ConventionalMultiplication;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 
 import java.util.Random;
 
 public class Testing {
 
     public static void main(String[] args) {
-        int n = 5;
+        int n = 8;
         Matrix a = new DoubleMatrix();
         Matrix b = new DoubleMatrix();
         a.startMatrix(n,n); b.startMatrix(n,n);
@@ -36,11 +30,16 @@ public class Testing {
         Matrix c1 = ConventionalMultiplication.execute(a,b);
         //Matrix c2 = ParallelStreamsMultiplication.execute(a,b);
         //Matrix c3 = ParallelThreadsMultiplication.execute(a,b);
-        Matrix c4 = ParalllelExecutorsMultiplication.execute(a,b);
+        //Matrix c4 = ParalllelExecutorsMultiplication.execute(a,b);
+        //Matrix c5 = TiledThreadsMultiplication.execute(a,b);
+        Matrix c7 = StreamsMultiplication.execute(a,b);
         c1.printMatrix();
         //c2.printMatrix();
         //c3.printMatrix();
-        c4.printMatrix();
+        System.out.println("..................");
+        //c4.printMatrix();
+        //c5.printMatrix();
+        c7.printMatrix();
 
 
     }
