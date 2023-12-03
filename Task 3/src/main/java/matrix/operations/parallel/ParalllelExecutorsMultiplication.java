@@ -11,7 +11,7 @@ public class ParalllelExecutorsMultiplication {
 
     public static Matrix execute(Matrix a, Matrix b ){
 
-        ExecutorService executorService = Executors.newFixedThreadPool(16);
+        ExecutorService executorService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         int size = a.getRowsLen();
         Matrix c = new DoubleMatrix();
         c.startMatrix(a.getRowsLen(),b.getColsLen());

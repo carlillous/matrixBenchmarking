@@ -10,7 +10,7 @@ import java.util.Random;
 public class Testing {
 
     public static void main(String[] args) {
-        int n = 32;
+        int n = 64;
         Matrix a = new DoubleMatrix();
         Matrix b = new DoubleMatrix();
         a.startMatrix(n,n); b.startMatrix(n,n);
@@ -30,20 +30,20 @@ public class Testing {
         Matrix c1 = ConventionalMultiplication.execute(a,b);
         //Matrix c2 = ParallelStreamsMultiplication.execute(a,b);
         //Matrix c3 = ParallelThreadsMultiplication.execute(a,b);
-        //Matrix c4 = ParalllelExecutorsMultiplication.execute(a,b);
-        Matrix c5 = TiledThreadsMultiplication.execute(a,b);
-        Matrix c7 = StreamsMultiplication.execute(a,b);
+        Matrix c4 = ParalllelExecutorsMultiplication.execute(a,b);
+        //Matrix c5 = TiledThreadsMultiplication.execute(a,b);
+        //Matrix c7 = StreamsMultiplication.execute(a,b);
         c1.printMatrix();
         System.out.println("..................");
         //c2.printMatrix();
         System.out.println("..................");
         //c3.printMatrix();
         System.out.println("..................");
-        //c4.printMatrix();
+        c4.printMatrix();
         System.out.println("..................");
         //c5.printMatrix();
         System.out.println("..................");
-        c7.printMatrix();
+        //c7.printMatrix();
 
     }
 

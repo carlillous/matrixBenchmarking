@@ -16,7 +16,7 @@ public class ParallelMultiplicationBenchmarking {
 
     @State(Scope.Thread)
     public static class Operands{
-        private final int n = 8;
+        private final int n = 4096;
         private Matrix a = new DoubleMatrix();
         private Matrix b = new DoubleMatrix();
 
@@ -41,20 +41,20 @@ public class ParallelMultiplicationBenchmarking {
 
     }
 
-    //@Benchmark
-    //@Fork(value=1)
-    //@Measurement(iterations = 4)
-    //@Warmup(iterations = 2)
-    //public void streamsMultiplication(Operands operands){
-    //    StreamsMultiplication.execute(operands.a, operands.b);
-    //}
+    @Benchmark
+    @Fork(value=2)
+    @Measurement(iterations = 4)
+    @Warmup(iterations = 2)
+    public void streamsMultiplication(Operands operands){
+        StreamsMultiplication.execute(operands.a, operands.b);
+    }
 
     @Benchmark
-    @Fork(value=1)
+    @Fork(value=2)
     @Measurement(iterations = 4)
     @Warmup(iterations = 2)
     public void streamsParallelMultiplication(Operands operands){
-        ParallelStreamsMultiplication.execute(operands.a, operands.b);
+       ParallelStreamsMultiplication.execute(operands.a, operands.b);
     }
 
     @Benchmark

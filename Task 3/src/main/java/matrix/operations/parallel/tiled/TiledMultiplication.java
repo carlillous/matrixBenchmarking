@@ -7,11 +7,11 @@ public class TiledMultiplication {
     public static void execute(Matrix a, Matrix b, Matrix c, int row, int col, int comm, int TILE_SIZE) {
         for (int i = row; i < Math.min(row + TILE_SIZE, a.getRowsLen()); i++) {
             for (int j = col; j < Math.min(col + TILE_SIZE, b.getColsLen()); j++) {
-                double aux = c.getValue(i, j); // Accumulate in the existing value
+                double aux = c.getValue(i, j);
                 for (int k = comm; k < Math.min(comm + TILE_SIZE, b.getRowsLen()); k++) {
                     aux += a.getValue(i, k) * b.getValue(k, j);
                 }
-                synchronized (c) { // Synchronize on matrix c
+                synchronized (c) {
                     c.setValue(i, j, aux);
                 }
             }
