@@ -17,8 +17,6 @@ public class MultiplicationBenchmarking {
         private final int n = 4096;
         private Matrix a = new DoubleMatrix();
         private Matrix b = new DoubleMatrix();
-        private CompressedRowStorage a2;
-        private CompressedColumnStorage b2;
 
         @Setup
         public void setup() {
