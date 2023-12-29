@@ -1,34 +1,35 @@
 import os
-from utils.matrix_builder import MatrixBuilder
-from utils.matrix_reader import MatrixReader
-from mm_mr.matrix_multiplication_mr import MatrixMultiplicationMR
+import subprocess
 
-def run_mapreduce_job(input_file, output_dir):
-    mr_job = MatrixMultiplicationMR(args=[input_file, '--output-dir', output_dir])
+from utils.matrix_builder import MatrixBuilder
+from mm_mr.matrix_multiplication_mr import MatrixMultiplicationMR
+from utils.matrix_loader import MatrixLoader
+from utils.functions import combine_output_files,clean_output_directory
+
+def run_mapreduce_job(input_file, output_dir,dim):
+    mr_job = MatrixMultiplicationMR(args=[input_file, '--output-dir', output_dir,'--m-dimension',str(dim),'--p-dimension',str(dim)])
     with mr_job.make_runner() as runner:
         runner.run()
 
 def main():
-    # Configuración
-    dimension = 10
+    n = 10
     input_filename = 'matrix_input.txt'
     output_directory = 'output'
     output_filename = os.path.join(output_directory, 'part-00000')  # mrjob genera este archivo de salida por defecto
 
-    # Paso 1: Generar matrices aleatorias y guardarlas en un archivo
     print("Generando matrices aleatorias...")
-    builder = MatrixBuilder(dimension, filename=input_filename)
+    builder = MatrixBuilder(n, filename=input_filename)
     builder.generate_matrices()
 
-    # Paso 2: Ejecutar el trabajo MapReduce
     print("Ejecutando el trabajo MapReduce...")
-    run_mapreduce_job(input_filename, output_directory)
+    run_mapreduce_job(input_filename, output_directory,n)
+    combine_output_files(output_directory, 'final_output.txt')
+    clean_output_directory(output_directory)
 
-    # Paso 3: Leer y mostrar el resultado del trabajo MapReduce
     print("Leyendo y mostrando los resultados...")
     if os.path.exists(output_filename):
-        reader = MatrixReader(filename=output_filename)
-        reader.read_matrix()
+        reader = MatrixLoader(output_filename)
+        reader.get_matrix()
     else:
         print("No se encontraron resultados de MapReduce.")
 

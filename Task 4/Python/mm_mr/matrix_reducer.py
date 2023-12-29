@@ -1,17 +1,19 @@
 class MatrixReducer:
     def reduce(self, key, values):
-        # Crear estructuras para almacenar los valores de A y B
-        values_A = {}
-        values_B = {}
+        hash_A = {}
+        hash_B = {}
 
-        # Separar los valores de A y B
-        for matrix, pos, value in values:
-            if matrix == 'A':
-                values_A[pos] = value
-            elif matrix == 'B':
-                values_B[pos] = value
+        # Separate the values for matrix A and B
+        for value in values:
+            if value[0] == 'A':
+                _, j, a_ij = value
+                hash_A[j] = a_ij
+            elif value[0] == 'B':
+                _, j, b_jk = value
+                hash_B[j] = b_jk
 
-        # Calcular el producto para el elemento de la matriz C
-        sum_product = sum(values_A[k] * values_B[k] for k in values_A if k in values_B)
+        # Perform the multiplication for the current cell
+        result = sum(hash_A[j] * hash_B.get(j, 0) for j in hash_A)
 
-        yield key, sum_product
+        # Emit the result for this cell
+        yield key, result

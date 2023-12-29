@@ -7,8 +7,7 @@ class MatrixBuilder:
         self.max_value = max_value
 
     def generate_matrices(self):
-        with open(self.filename, 'w') as f:
-            f.write(f'dimensions,{self.dimension}\n')  # Escribir las dimensiones solo una vez
+        with open(self.filename, 'w',encoding='utf-8') as f:
             # Generar matriz A
             for i in range(self.dimension):
                 for j in range(i, self.dimension):  # Aprovecha la simetría
