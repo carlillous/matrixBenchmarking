@@ -4,11 +4,11 @@ class MatrixLoader:
         self.matrix = {}
 
     def load_matrix(self):
-        with open(self.file_path, 'r', encoding='utf-16') as file:  # Ajusta la codificación si es necesario
+        with open(self.file_path, 'r', encoding='utf-16') as file:
             for line in file:
                 line = line.strip()
                 if not line:
-                    continue  # Ignorar líneas vacías
+                    continue
                 position, value = line.split('\t')
                 i, j = self._parse_position(position)
                 self._set_value(i, j, float(value))
@@ -24,7 +24,6 @@ class MatrixLoader:
         self.matrix[i][j] = value
 
     def get_matrix(self):
-        # Convert the dictionary to a 2D list
         if not self.matrix:
             return []
 

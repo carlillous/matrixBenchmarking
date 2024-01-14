@@ -11,7 +11,7 @@ class MatrixMultiplication:
             for line in file:
                 parts = line.strip().split(',')
                 if len(parts) != 4:
-                    continue  # Skip lines that don't have exactly 4 items
+                    continue
                 matrix_name, i, j, value = parts[0], int(parts[1]), int(parts[2]), float(parts[3])
 
                 if matrix_name == 'A':
@@ -21,7 +21,7 @@ class MatrixMultiplication:
                 elif matrix_name == 'B':
                     if j not in self.matrix_b:
                         self.matrix_b[j] = {}
-                    self.matrix_b[j][i] = value  # Transpose for easier multiplication
+                    self.matrix_b[j][i] = value
 
     def multiply_matrices(self):
         for i in self.matrix_a:
@@ -35,7 +35,6 @@ class MatrixMultiplication:
                         self.matrix_c[i][j] += self.matrix_a[i][k] * self.matrix_b[j][k]
 
     def get_result(self):
-        # Convert the dictionary to a 2D list (matrix)
         max_row = max(self.matrix_c.keys()) if self.matrix_c else 0
         max_col = max((max(cols.keys()) for cols in self.matrix_c.values()), default=0)
         result_matrix = [[0 for _ in range(max_col + 1)] for _ in range(max_row + 1)]

@@ -13,7 +13,6 @@ class MatrixMultiplicationMR(MRJob):
         ]
 
     def mapper(self, _, line):
-        # Assuming m and p are passed as job arguments or defined globally
         mapper = MatrixMapper(m=self.options.m_dimension, p=self.options.p_dimension)
         return mapper.map(_, line)
 
@@ -25,6 +24,11 @@ class MatrixMultiplicationMR(MRJob):
         super(MatrixMultiplicationMR, self).configure_args()
         self.add_passthru_arg('--m-dimension', type=int, help='Dimension m of the matrix')
         self.add_passthru_arg('--p-dimension', type=int, help='Dimension p of the matrix')
+
+    def set_up_logging(self, quiet=False, verbose=False, stream=None):
+        return super(MatrixMultiplicationMR, self).set_up_logging(
+            quiet=True, verbose=verbose, stream=stream
+        )
 
 if __name__ == '__main__':
     MatrixMultiplicationMR.run()

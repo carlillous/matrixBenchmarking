@@ -5,14 +5,12 @@ class MatrixMapper:
         self.p = p
 
     def map(self, _, line):
-        # Parse the input line
         elements = line.split(',')
         matrix_name = elements[0]  # "A" or "B"
         i = int(elements[1])
         j = int(elements[2])
         value = float(elements[3])
 
-        # Emit key-value pairs according to the matrix name
         if matrix_name == "A":
             for k in range(self.p):
                 yield (i, k), ('A', j, value)

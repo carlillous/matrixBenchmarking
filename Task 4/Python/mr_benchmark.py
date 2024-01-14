@@ -27,12 +27,12 @@ class MatrixMultiplicationMRBenchmark():
         return execution_time
 
     def matrixmultiplication_mr_benchmark(self):
-        n = [8, 16, 32, 64, 128, 256, 512, 1024, 1536, 2048, 4096]
+        n = [8, 16, 32, 64, 128, 256, 512, 1024, 2048]
         times = []
         print("[INFO] Starting Benchmark...")
         for i in range(len(n)):
             exec_time = self._matrixmultiplication_mr_execution(n[i])
-            print(f"i = {n[i]} -> {exec_time}")
+            print(f"i = {n[i]} -> {round(exec_time, 5)}")
             times.append(round(exec_time, 5))
         print("[INFO] Benchmark completed.")
 
